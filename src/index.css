@@ -1,0 +1,13 @@
+/* .mobile-landing-bg {
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+} */
+
+body {
+  background-color: rgb(253, 253, 253);
+}
+
+input {
+  -webkit-appearance: none;
+}
