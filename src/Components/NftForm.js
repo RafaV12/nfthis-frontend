@@ -48,7 +48,7 @@ export default function NftForm() {
     const { title, description, price, category } = values;
     try {
       await axios.post(
-        'http://localhost:3001/nfts/',
+        'https://nfthis-api.onrender.com/nfts/',
         {
           image: base64EncodedImage,
           title,
@@ -94,18 +94,8 @@ export default function NftForm() {
         <label className="mb-3">
           <b>NFT image</b>
         </label>
-        {previewSource && (
-          <img src={previewSource} alt="" className="mb-7 h-56 w-56" />
-        )}
-        <input
-          id="fileInput"
-          type="file"
-          name="image"
-          onChange={handleFileInput}
-          value={fileInputState}
-          className="mb-3 h-10"
-          required
-        />
+        {previewSource && <img src={previewSource} alt="" className="mb-7 h-56 w-56" />}
+        <input id="fileInput" type="file" name="image" onChange={handleFileInput} value={fileInputState} className="mb-3 h-10" required />
         <label>
           <b>NFT title</b>
         </label>
@@ -122,11 +112,7 @@ export default function NftForm() {
         <label>
           <b>NFT category</b>
         </label>
-        <select
-          onChange={handleChange}
-          name="category"
-          className="pl-4 mb-7 h-10 w-full border outline-none rounded-md"
-        >
+        <select onChange={handleChange} name="category" className="pl-4 mb-7 h-10 w-full border outline-none rounded-md">
           <option value="Other">Select NFT category</option>
           <option value="Memes">Memes</option>
           <option value="Funny">Funny</option>
@@ -158,10 +144,7 @@ export default function NftForm() {
           placeholder="Enter NFT price"
           required
         />
-        <button
-          type="submit"
-          className="w-40 text-white bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2"
-        >
+        <button type="submit" className="w-40 text-white bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
           Create
         </button>
       </form>
