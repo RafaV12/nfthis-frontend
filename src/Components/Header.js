@@ -12,7 +12,7 @@ const Header = () => {
     setShowMenu(false);
   };
   return (
-    <header className="fixed top-0 px-3 md:pb-3 h-12 md:h-auto w-full flex backdrop-filter backdrop-blur-2xl md:border justify-between items-center z-30 bg-white bg-opacity-10 md:bg-opacity-0 xl:left-1/2 xl:transform xl:-translate-x-1/2 2xl:container">
+    <header className="fixed top-0 p-2 h-12 md:h-auto w-full flex backdrop-filter backdrop-blur-2xl justify-between items-center z-30 bg-white bg-opacity-10 md:pb-5 lg:px-4 md:border md:bg-opacity-0 xl:left-1/2 xl:transform xl:-translate-x-1/2 2xl:container">
       <BiMenuAltLeft
         className="md:hidden text-3xl z-10 w-10 cursor-pointer"
         style={{ color: '#1F51FF' }}
@@ -73,15 +73,15 @@ const Header = () => {
         {user && (
           <Link to="/profile">
             <img
-              className="w-8 h-8 rounded-full bg-white mr-2 md:w-10 md:h-10 md:mt-2"
-              src="http://romanroadtrust.co.uk/wp-content/uploads/2018/01/profile-icon-png-898.png"
+              className="w-8 h-8 rounded-full bg-white md:w-10 md:h-10 md:mt-2"
+              src="https://i.pinimg.com/originals/8a/13/ba/8a13babd54171ede85b5b40565698682.jpg"
               alt=""
             />
           </Link>
         )}
         {/* Logo */}
         <Link to="/">
-          <img src="https://i.ibb.co/w7Bc5w7/Group-1.png" alt="logo" className="h-10 w-10 md:mt-2" />
+          <img src="https://i.ibb.co/w7Bc5w7/Group-1.png" alt="logo" className="ml-3 h-10 w-10 md:mt-2" />
         </Link>
       </div>
     </header>

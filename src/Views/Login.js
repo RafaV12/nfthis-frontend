@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { useGlobalContext } from '../context/appContext';
 
@@ -8,7 +8,17 @@ const Login = () => {
     password: '',
   });
 
-  const { user, login, isLoading, showAlert } = useGlobalContext();
+  const { user, login, isLoading, showAlert, clearAlert } = useGlobalContext();
+
+  // Clear alerts after 2 secs
+  useEffect(() => {
+    if (showAlert) {
+      setTimeout(() => {
+        clearAlert();
+      }, 2000);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showAlert]);
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -24,18 +34,11 @@ const Login = () => {
   return (
     <div className="min-h-screen py-7 px-7 flex justify-center items-center">
       {user && <Redirect to="/" />}
-      {/* {showAlert && (
-        <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center border-t text-red-500 font-semibold bg-white p-7 text-lg z-10 rounded-md shadow-lg">
-          {error}
-        </p>
-      )} */}
       <div className="h-full container flex flex-col items-center lg:flex-row lg:justify-between xl:w-4/5">
         {/* Page Header */}
         <div className="flex flex-col items-center text-center text-black w-80 lg:-mt-10">
           <h1 className="text-blue-600 text-3xl font-semibold">NFThis</h1>
-          <p className="mt-2 text-lg text-gray-500 leading-5">
-            Discover developers, assets and helpful resources fast and securely.
-          </p>
+          <p className="mt-2 text-lg text-gray-500 leading-5">Discover developers, assets and helpful resources fast and securely.</p>
         </div>
 
         {/* Form container */}
@@ -71,11 +74,7 @@ const Login = () => {
               required
             />
 
-            {showAlert && (
-              <div className="mt-2 text-red-500 font-md">
-                Invalid credentials. Try again.
-              </div>
-            )}
+            {showAlert && <div className="mt-2 text-red-500 font-md">Invalid credentials. Try again.</div>}
 
             <button
               type="submit"

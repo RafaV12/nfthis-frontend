@@ -48,7 +48,7 @@ export default function NftForm() {
     const { title, description, price, category } = values;
     try {
       await axios.post(
-        'https://nfthis-api.onrender.com/nfts/',
+        'http://localhost:3001/nfts/',
         {
           image: base64EncodedImage,
           title,
@@ -90,7 +90,7 @@ export default function NftForm() {
     <>
       {showAlert && <Alert msg={errMsg} type="danger" />}
       <Alert msg={successMsg} type="success" />
-      <form className="mt-14 w-full flex flex-col items-center md:w-2/4 lg:w-2/6" onSubmit={onSubmit}>
+      <form className="mt-14 w-full flex flex-col items-center md:mt-20 md:w-2/4 lg:w-2/6" onSubmit={onSubmit}>
         <label className="mb-3">
           <b>NFT image</b>
         </label>

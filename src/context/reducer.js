@@ -15,6 +15,13 @@ const reducer = (state, action) => {
     };
   }
 
+  if (action.type === 'CLEAR_ALERT') {
+    return {
+      ...state,
+      showAlert: false,
+    };
+  }
+
   if (action.type === 'SET_USER') {
     return { ...state, user: action.payload, showAlert: false };
   }
@@ -50,7 +57,7 @@ const reducer = (state, action) => {
       ...state,
       isLoading: false,
       user: null,
-      showAlert: true,
+      showAlert: action.payload,
     };
   }
 
@@ -189,10 +196,7 @@ const reducer = (state, action) => {
     };
   }
 
-  if (
-    action.type === 'FOLLOW_USER_SUCCESS' ||
-    action.type === 'UNFOLLOW_USER_SUCCESS'
-  ) {
+  if (action.type === 'FOLLOW_USER_SUCCESS' || action.type === 'UNFOLLOW_USER_SUCCESS') {
     return {
       ...state,
       isLoading: false,
@@ -201,10 +205,7 @@ const reducer = (state, action) => {
     };
   }
 
-  if (
-    action.type === 'FOLLOW_USER_ERROR' ||
-    action.type === 'UNFOLLOW_USER_ERROR'
-  ) {
+  if (action.type === 'FOLLOW_USER_ERROR' || action.type === 'UNFOLLOW_USER_ERROR') {
     return {
       ...state,
       isLoading: false,

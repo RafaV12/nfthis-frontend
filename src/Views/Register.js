@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { useGlobalContext } from '../context/appContext';
 
@@ -10,7 +10,17 @@ const Register = () => {
     isMember: true,
   });
 
-  const { user, register, isLoading, showAlert } = useGlobalContext();
+  const { user, register, isLoading, showAlert, clearAlert } = useGlobalContext();
+
+  // Clear alerts after 2 secs
+  useEffect(() => {
+    if (showAlert) {
+      setTimeout(() => {
+        clearAlert();
+      }, 2000);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showAlert]);
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -26,18 +36,16 @@ const Register = () => {
   return (
     <div className="min-h-screen pt-20 pb-14 px-7 flex justify-center items-center lg:pt-32">
       {user && <Redirect to="/" />}
-      {/* {showAlert && (
-        <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center border-t text-red-500 font-semibold bg-white p-7 text-lg z-10 rounded-md shadow-lg">
-          {error}
+      {showAlert && (
+        <p className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center border-t text-red-500 bg-white p-7 text-lg z-10 rounded-md shadow-lg">
+          {showAlert}
         </p>
-      )} */}
+      )}
       <div className="h-full container flex flex-col items-center lg:flex-row lg:justify-between xl:w-4/5">
         {/* Page Header */}
         <div className="flex flex-col items-center text-center text-black w-80 lg:-mt-10">
           <h1 className="text-blue-600 text-3xl font-semibold">NFThis</h1>
-          <p className="mt-2 text-lg  text-gray-500 leading-5">
-            Discover developers, assets and helpful resources fast and securely.
-          </p>
+          <p className="mt-2 text-lg  text-gray-500 leading-5">Discover developers, assets and helpful resources fast and securely.</p>
         </div>
 
         {/* Form container */}
@@ -74,9 +82,7 @@ const Register = () => {
             />
 
             {values.password.length === 0 ? (
-              <p className="mt-1 text-sm text-gray-400">
-                At least 5 characters
-              </p>
+              <p className="mt-1 text-sm text-gray-400">At least 5 characters</p>
             ) : values.password.length > 0 && values.password.length < 5 ? (
               <p className="mt-1 text-red-500 font-md">Password is weak!</p>
             ) : (
@@ -95,17 +101,11 @@ const Register = () => {
               onChange={handleChange}
               required
             />
-            {values.password !== values.repeatPassword && (
-              <p className="mt-1 text-red-500 font-md">
-                Passwords do not match!
-              </p>
-            )}
+            {values.password !== values.repeatPassword && <p className="mt-1 text-red-500 font-md">Passwords do not match!</p>}
 
             <button
               type="submit"
-              disabled={
-                values.password !== values.repeatPassword ? 'disabled' : false
-              }
+              disabled={values.password !== values.repeatPassword ? 'disabled' : false}
               className="mt-7 w-full h-12 flex items-center justify-center bg-blue-500 font-semibold rounded-md outline-none text-white shadow-md"
             >
               {isLoading ? 'Loading...' : 'Register'}
