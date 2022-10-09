@@ -48,7 +48,7 @@ export default function NftForm() {
     const { title, description, price, category } = values;
     try {
       await axios.post(
-        'http://localhost:3001/nfts/',
+        'https://nfthis.onrender.com/nfts/',
         {
           image: base64EncodedImage,
           title,

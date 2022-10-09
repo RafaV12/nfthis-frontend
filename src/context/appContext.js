@@ -27,7 +27,7 @@ const AppProvider = ({ children }) => {
     setLoading();
     const user = JSON.parse(localStorage.getItem('user'));
     try {
-      const { data } = await axios.get('http://localhost:3001/profile', {
+      const { data } = await axios.get('https://nfthis.onrender.com/profile', {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
@@ -43,7 +43,7 @@ const AppProvider = ({ children }) => {
   const register = async (userInput) => {
     setLoading();
     try {
-      const { data } = await axios.post('http://localhost:3001/register', {
+      const { data } = await axios.post('https://nfthis.onrender.com/register', {
         ...userInput,
       });
 
@@ -67,7 +67,7 @@ const AppProvider = ({ children }) => {
   const login = async (userInput) => {
     setLoading();
     try {
-      const { data } = await axios.post('http://localhost:3001/login', {
+      const { data } = await axios.post('https://nfthis.onrender.com/login', {
         ...userInput,
       });
       dispatch({ type: 'LOGIN_USER_SUCCESS', payload: data.user });
@@ -97,7 +97,7 @@ const AppProvider = ({ children }) => {
     const user = JSON.parse(localStorage.getItem('user'));
     try {
       const { data } = await axios.post(
-        'http://localhost:3001/nfts/',
+        'https://nfthis.onrender.com/nfts/',
         {
           ...userInput,
         },
@@ -117,7 +117,7 @@ const AppProvider = ({ children }) => {
   const fetchNfts = async () => {
     setLoading();
     try {
-      const { data: nfts } = await axios.get(`http://localhost:3001/api/nfts`);
+      const { data: nfts } = await axios.get(`https://nfthis.onrender.com/api/nfts`);
       dispatch({ type: 'FETCH_NFTS_SUCCESS', payload: nfts });
     } catch (error) {
       dispatch({ type: 'FETCH_NFTS_ERROR' });
@@ -128,7 +128,7 @@ const AppProvider = ({ children }) => {
     clearState();
     setLoading();
     try {
-      const { data: nft } = await axios.get(`http://localhost:3001/api/nft/${nftId}`);
+      const { data: nft } = await axios.get(`https://nfthis.onrender.com/api/nft/${nftId}`);
       dispatch({ type: 'FETCH_SINGLE_NFT_SUCCESS', payload: nft });
     } catch (error) {
       dispatch({ type: 'FETCH_SINGLE_NFT_ERROR' });
@@ -139,7 +139,7 @@ const AppProvider = ({ children }) => {
     clearState();
     setLoading();
     try {
-      const { data: sellers } = await axios.get('http://localhost:3001/api/users');
+      const { data: sellers } = await axios.get('https://nfthis.onrender.com/api/users');
       dispatch({ type: 'FETCH_SELLERS_SUCCESS', payload: sellers });
     } catch (error) {
       dispatch({ type: 'FETCH_SELLERS_ERROR' });
@@ -149,7 +149,7 @@ const AppProvider = ({ children }) => {
   const fetchSingleSeller = async (username) => {
     setLoading();
     try {
-      const { data: seller } = await axios.get(`http://localhost:3001/api/user/${username}`);
+      const { data: seller } = await axios.get(`https://nfthis.onrender.com/api/user/${username}`);
       dispatch({ type: 'FETCH_SINGLE_SELLER_SUCCESS', payload: seller });
     } catch (error) {
       dispatch({ type: 'FETCH_SINGLE_SELLER_ERROR' });
@@ -171,7 +171,7 @@ const AppProvider = ({ children }) => {
     const { userId } = user;
     try {
       const { data } = await axios.patch(
-        'http://localhost:3001/settings',
+        'https://nfthis.onrender.com/settings',
         {
           ...userInput,
           userId,
@@ -201,7 +201,7 @@ const AppProvider = ({ children }) => {
     const { username } = user;
     try {
       const { data } = await axios.patch(
-        `http://localhost:3001/user/${userToFollowId}`,
+        `https://nfthis.onrender.com/user/${userToFollowId}`,
         {
           loggedUserId: username,
           userToFollowId,
@@ -226,7 +226,7 @@ const AppProvider = ({ children }) => {
     const { username } = user;
     try {
       const { data } = await axios.patch(
-        `http://localhost:3001/user/${userToUnfollowId}`,
+        `https://nfthis.onrender.com/user/${userToUnfollowId}`,
         {
           loggedUserId: username,
           userToUnfollowId,
@@ -249,7 +249,7 @@ const AppProvider = ({ children }) => {
     const user = JSON.parse(localStorage.getItem('user'));
     try {
       const { data } = await axios.delete(
-        `http://localhost:3001/nfts/${nftId}`,
+        `https://nfthis.onrender.com/nfts/${nftId}`,
 
         {
           headers: {
